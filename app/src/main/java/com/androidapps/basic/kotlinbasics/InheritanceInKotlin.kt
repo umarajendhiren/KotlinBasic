@@ -8,6 +8,9 @@ package com.androidapps.basic.kotlinbasics
 
 class Example // Implicitly inherits from Any
 
+//merge conflict
+var firstname="uma"
+
 
 /*By default, Kotlin classes are final – they can’t be inherited.
 To make a class inheritable, mark it with the open keyword:
