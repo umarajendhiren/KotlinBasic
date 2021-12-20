@@ -26,10 +26,12 @@ fun main() {
     }
 
     // call downloadDataFunction
-    downloadData("fakeUrl.com",{
-        println("The code in this block, will only run" +
-                "after the completion()")
-    })
+    downloadData("fakeUrl.com") {
+        println(
+            "The code in this block, will only run" +
+                    "after the completion()"
+        )
+    }
 
     fun downloadCarData(url: String, completion: (Car) -> Unit) {
         // send a download request
