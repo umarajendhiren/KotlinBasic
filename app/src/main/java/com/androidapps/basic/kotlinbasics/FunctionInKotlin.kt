@@ -5,6 +5,10 @@ In programming, function is used to break the code into smaller modules which ma
 /*In kotlin ,functions are declared using fun keyword
 * Function parameters are defined using Pascal notation - name: type.
 *  Parameters are separated using commas, and each parameter must be explicitly typed:*/
+
+
+/*{} curly braces ,define a body of function
+* and  define the code that needs to be run*/
 fun powerOf(number: Int, exponent: Int): Int {
     return 2;
 }
@@ -29,6 +33,7 @@ if user did not write email id when login,default value will be  used otherwise 
  */
 
 fun login(username: String, password: String, emailId: String = "optionalEmailId") {
+    //println() displays message  and introduce new line but print() not.
     println(" $username $password $emailId")
 }
 
@@ -103,7 +108,6 @@ fun printHello(name: String?): Unit {
 
 //The Unit return type declaration is also optional. The above code is equivalent to:
 //fun printHello(name: String?) {  }
-
 
 
 /*
