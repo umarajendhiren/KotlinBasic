@@ -2,6 +2,11 @@ package com.androidapps.basic.kotlinbasics
 
 fun main(){
 
+  arithmeticOperator()
+
+}
+
+fun arithmeticOperator() {
     println("Addition:${1+1}")
     println("concatenation :"+"hi "+"there")
 
@@ -27,6 +32,5 @@ fun main(){
 
     println("i have ${dog--} dogs")  //4
     println("i have ${--dog} dogs")   //2
-
 
 }
