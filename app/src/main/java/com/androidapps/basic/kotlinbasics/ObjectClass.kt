@@ -31,5 +31,5 @@ fun main() {
     } else {
         MyDatabase.connect()
     }
-
+   println(MyDatabase.isConnected)
 }
