@@ -5,6 +5,10 @@ In programming, function is used to break the code into smaller modules which ma
 /*In kotlin ,functions are declared using fun keyword
 * Function parameters are defined using Pascal notation - name: type.
 *  Parameters are separated using commas, and each parameter must be explicitly typed:*/
+
+
+/*{} curly braces ,define a body of function
+* and  define the code that needs to be run*/
 fun powerOf(number: Int, exponent: Int): Int {
     return 2;
 }
@@ -29,6 +33,7 @@ if user did not write email id when login,default value will be  used otherwise 
  */
 
 fun login(username: String, password: String, emailId: String = "optionalEmailId") {
+    //println() displays message  and introduce new line but print() not.
     println(" $username $password $emailId")
 }
 
@@ -81,7 +86,7 @@ When you use named arguments in a function call, you can freely change the order
  and if you want to use their default values, you can just leave these arguments out altogether.
 
  for ex,in java ,i have function SaveMyDetails(String username,String password,String UserEmailId,String address)
- i always need to pass argument as the same order in funtion like first username,second password..
+ i always need to pass argument as the same order in function like first username,second password..
  but in kotlin ,using named argument,we can freely change the order of argument
 
   loginDefaultValueFirst(password = "pass",username = "ums" )
@@ -103,7 +108,6 @@ fun printHello(name: String?): Unit {
 
 //The Unit return type declaration is also optional. The above code is equivalent to:
 //fun printHello(name: String?) {  }
-
 
 
 /*
@@ -213,7 +217,105 @@ extension functions:
  */
 
 
+/*scope:
+* scope of the function means visibility of function
+variable defined inside a function only available (exists) inside  that function*/
 
+/*vararg:
+* variable number of parameters(argument)
+* if we wats to send more string as argument we can use vararg
+* important thing is type of arguments should be same ,we can not send string and integer*/
+
+fun varArgExample1(vararg names: String) {
+    for (name in names) {
+        println("Hello $name")  //names are collection
+    }
+}
+
+/*addition of numbers*/
+fun varArgExample2(vararg numbers: Int): Int {
+    var sum = 0
+    for (number in numbers) {
+        sum += number
+    }
+    return sum
+}
+
+
+/*Create a function that takes an integer variable “count” and a variable number of client names.
+ Print out “count” hello messages for each client.
+
+i.e. if count = 3, print out 3 hello messages for each client.*/
+
+fun greeting(count: Int, vararg clientNames: String) {
+    for (clientName in clientNames) {
+        for (i in 1..count) {
+            println("hello $clientName")
+        }
+    }
+}
+
+fun overloadingFunExample() {
+    /*two function can have same name and different number of argument or different type of argument .that is overloading */
+
+    funWithDifferentNumberOfArgument("jack")
+    funWithDifferentNumberOfArgument("jack", "sdf")
+
+    funWithDifferentTypeOfArgument("90")
+    funWithDifferentTypeOfArgument(90)
+
+    exercise1ForOverloading()
+    exercise2ForOverloading()
+}
+
+fun exercise2ForOverloading() {
+    /*create a function that takes a message and prints out length of message.
+    * overload another function that takes an integer and prints out length of message*/
+    lengthOfMessage("dkjsfh")
+    lengthOfMessage(100)
+}
+
+fun lengthOfMessage(message: String) {
+    println("length of string $message is ${message.length}")
+}
+
+fun lengthOfMessage(message: Int) {
+    println("length of int  $message is ${message.toString().length}")
+}
+
+fun exercise1ForOverloading() {
+    /*create overloading function that takes either animal or list of animal
+    * then print out the message to feed each animal*/
+
+    feedAnimal("cat")
+    feedAnimal(listOf("dog", "pig", "cow"))
+}
+
+fun feedAnimal(animalName: String) {
+    println("feed the $animalName")
+}
+
+fun feedAnimal(animalsName: Collection<String>) {
+    for (animalName in animalsName) {
+        println("feed the $animalName")
+    }
+}
+
+fun funWithDifferentTypeOfArgument(age: String) {
+    println("Your age is $age")
+}
+
+fun funWithDifferentTypeOfArgument(age: Int) {
+    println("Your age is $age")
+}
+
+fun funWithDifferentNumberOfArgument(name: String) {
+    println("Hello $name!")
+}
+
+fun funWithDifferentNumberOfArgument(firstName: String, lastName: String) {
+    println("Hello $firstName $lastName!")
+}
 
 fun main() {
     login("uma", "myPassword")
@@ -247,5 +349,36 @@ fun main() {
 
 // is the same as
     1.shl(2)
+
+
+    overloadingFunExample()
+
+    varArgExample1("cat", "dog", "pig")
+    println(varArgExample2(2, 56, 65, 55, 456, 45, 57, 4))
+    println(varArgExample2(66, 7, 8, 8, 6, 67, 67))
+    greeting(3, "fg", "gfg", "rt")
+
+    localFunctionExample()
+}
+
+fun localFunctionExample() {
+    /*Create a function that asks the user for a name until an empty string is introduced.
+
+    Create a local function that takes a name and prints a greeting.
+
+      For each name introduced, print out a greeting.*/
+    fun greetingMessage(enteredName: String) {
+        println("Hello $enteredName!")
+    }
+
+    while (true) {
+
+        println("enter Your name")
+        var enteredName = readLine() ?: ""
+        if (enteredName == "") break
+
+        greetingMessage(enteredName)
+    }
+
 
 }

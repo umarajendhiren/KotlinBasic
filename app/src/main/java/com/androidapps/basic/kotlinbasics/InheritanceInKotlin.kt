@@ -1,4 +1,7 @@
 package com.androidapps.basic.kotlinbasics
+/*A class inherits its values and function from another class
+* We can apply variable and methods of  class to another class without recreating them, without redefining them*/
+
 
 /*All classes in Kotlin have a common superclass, Any,
  which is the default superclass for a class with no supertypes declared:
@@ -142,7 +145,7 @@ open class Vehicle(var make:String,var model:String){
     fun applybreak(){println("stop")}
 }
 
-class Car( var makeOfCar:String, var modelOfCar:String, var color:String): Vehicle(makeOfCar,modelOfCar){
+open class Car( var makeOfCar:String, var modelOfCar:String, var color:String): Vehicle(makeOfCar,modelOfCar){
 
     override fun details() {
         super.details()
@@ -160,6 +163,64 @@ class Truck(var makeOfTruck:String ,var modelOfTruck:String,var colorOfTruck:Str
     }
 }
 
+
+
+
+
+/*this class has access to variable and methods in Car and vehicle class*/
+class ElectricCar(
+    var makeOfElectric: String,
+    var modelOfElectric: String,
+    var colorOfElectricCar: String
+) : Car(makeOfElectric, modelOfElectric, colorOfElectricCar)
+
+
+
+
+/*A class Laptop has characteristics like screenSize and speed, and a function run() that prints out a message which includes its characteristics.
+A class Apple is a Laptop, so it inherits the laptop characteristics.
+However it has a smaller screen size.
+Implement this in a program, call the method run in both Laptop and Apple, and observe the different values.
+*/
+open class Laptop() {
+    open var screenSize = 32
+    var speed = 1200
+    var name = "Generic laptop"
+    fun run() {
+        println(" $name ScreenSize is $screenSize and Speed is $speed")
+    }
+}
+
+class AppleLaptop : Laptop() {
+    override var screenSize = 28
+
+}
+
+
+
+
+/*An Airplane has speed and altitude. It also two methods, ascend which increases altitude, and descend, which decreases altitude.
+Create two classes that inherit from Airplane, Boeing and Airbus. They have different speeds.
+Create objects, call methods and print out messages for both child classes.
+*/
+
+open class Airplane(var speedOfAirplane: Int) {
+    var name="GenericAirPlane"
+    var speed = speedOfAirplane
+    var altitude = 938
+    fun ascend() {
+        println("increasing $name altitude")
+    }
+
+    fun descend() {
+        println("decreasing $name altitude")
+    }
+}
+
+class Boeing(var speedOfBoeing: Int) : Airplane(speedOfBoeing)
+
+
+class Airbus(var speedOfAirBus: Int) : Airplane(speedOfAirBus)
 fun main() {
     var car=Car("Honda","accord","Red")
     car.details();
@@ -169,4 +230,34 @@ fun main() {
     truck.details();
     truck.accelarate()
     truck.applybreak()
+
+
+    var electricCar = ElectricCar("Honda", "electric", "blue")
+    println(electricCar.color) //Car class variable
+    println(electricCar.make) //Vehicle class variable
+    println(electricCar.model) //Vehicle class variable
+
+
+    var laptop = Laptop()
+    // println("Laptop size is  ${laptop.screenSize} ")
+    laptop.run()
+
+    var appleLaptop = AppleLaptop()
+    appleLaptop.name = "Apple laptop"
+    //println("Apple Laptop size is  ${appleLaptop.screenSize} ")
+    appleLaptop.run()
+
+    var genericAirplane = Airplane(1000)
+    println("genericAirplane speed is ${genericAirplane.speed}")
+    genericAirplane.ascend()
+
+    var boeingAirplane=Boeing(700)
+    boeingAirplane.name="Boeing"
+    println("boeingAirplane speed is ${boeingAirplane.speed}")
+    boeingAirplane.descend()
+
+    var airBus=Airbus(500)
+    airBus.name="AirBus"
+    println("airBus speed is ${airBus.speed}")
+    airBus.ascend()
 }

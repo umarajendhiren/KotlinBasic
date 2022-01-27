@@ -1,5 +1,16 @@
 package com.androidapps.basic.kotlinbasics
-
+/*lambda function are function that don't have name.it's kind of anonymous function
+* we can pass lambda function as a parameter into another function
+*
+* regular function has the structure like have fun keyword followed by name of function then within parenthesis we can pass parameters then need to write block of codes within curly braces
+* but lambdas have only parameters then arrow then code for that function
+*
+* lambda function can be assigned to a variable
+* the variable can be passed passes as a parameter to a new function (higher order function)
+*
+* concept is, we can able to create function on the fly to pass  to other function
+*
+* higher order function is a function that takes another function as a parameter */
 fun main() {
     val printMyMessage = { message: String -> println(message) }
     printMyMessage("Hello kotlin!")
@@ -26,10 +37,12 @@ fun main() {
     }
 
     // call downloadDataFunction
-    downloadData("fakeUrl.com",{
-        println("The code in this block, will only run" +
-                "after the completion()")
-    })
+    downloadData("fakeUrl.com") {
+        println(
+            "The code in this block, will only run" +
+                    "after the completion()"
+        )
+    }
 
     fun downloadCarData(url: String, completion: (Car) -> Unit) {
         // send a download request

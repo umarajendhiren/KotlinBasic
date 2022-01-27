@@ -1,4 +1,10 @@
 package com.androidapps.basic.kotlinbasics
+/*class is a blue print it allow us to create object
+* class can have variables and functions
+* if we declare the variable in class context,that will available within class.All methods defined inside class can access that variable.
+* if we wants to access class component (function,variable) we need to create class instance (object)
+* object is an instance of the class ex:val carObj=Car()
+* Naming convention :Class name should starts with a capital letter*/
 
 /*Classes in Kotlin are declared using the keyword class:
 
@@ -51,19 +57,17 @@ Much like regular properties, properties declared in the primary constructor can
 
 class Person2(val name: String) {
     val children: MutableList<Person2> = mutableListOf()
+
     constructor(name: String, parent: Person2) : this(name) {
         parent.children.add(this)
     }
 }
 
 
-
-
 /*If you don't want your class to have a public constructor,
 declare an empty primary constructor with non-default visibility:*/
 
-class DontCreateMe private constructor () { /*...*/ }
-
+class DontCreateMe private constructor() { /*...*/ }
 
 
 /*Creating instances of classes
@@ -87,7 +91,7 @@ A class may be declared abstract, along with some or all of its members. An abst
 
 abstract class Polygon {
     abstract fun draw() //function without body should be abstract method.
-    fun nonAbstractfun(){
+    fun nonAbstractfun() {
 
     }
 

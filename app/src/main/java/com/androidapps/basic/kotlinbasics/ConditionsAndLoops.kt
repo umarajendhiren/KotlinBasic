@@ -8,33 +8,33 @@ fun main() {
 
     //whenExpression();
 
-   /* println(whenAsExpression("Hello"))
-    println(whenAsExpression(3.4))
-    println(whenAsExpression(1))
-    println(whenAsExpression(KotlinBasic()))*/
+    /* println(whenAsExpression("Hello"))
+     println(whenAsExpression(3.4))
+     println(whenAsExpression(1))
+     println(whenAsExpression(KotlinBasic()))*/
 
-  /*  whenAsStatement("Hello")
-    whenAsStatement(1)
-    whenAsStatement(0L)
-    whenAsStatement(KotlinBasic())
-    whenAsStatement("hello")*/
+    /*  whenAsStatement("Hello")
+      whenAsStatement(1)
+      whenAsStatement(0L)
+      whenAsStatement(KotlinBasic())
+      whenAsStatement("hello")*/
 
-   // isStringOrInt("uma")
+    // isStringOrInt("uma")
     //isStringOrInt(1)
 
-   // forLoopRangeExpression()
+    //forLoopRangeExpression()
 
     whileAndDoWhile()
 
 }
 
 fun whileAndDoWhile() {
-   /*while and do-while loops execute their body continuously while their condition is satisfied.
+    /*while and do-while loops execute their body continuously while their condition is satisfied.
 
-     while checks the condition and, if it's satisfied, executes the body and then returns to the condition check.
+      while checks the condition and, if it's satisfied, executes the body and then returns to the condition check.
 
-     do-while executes the body and then checks the condition. If it's satisfied, the loop repeats.
-     So, the body of do-while executes at least once regardless of the condition.*/
+      do-while executes the body and then checks the condition. If it's satisfied, the loop repeats.
+      So, the body of do-while executes at least once regardless of the condition.*/
 
     fun eatACake() = println("Eat a Cake")
     fun bakeACake() = println("Bake a Cake")
@@ -44,13 +44,81 @@ fun whileAndDoWhile() {
 
     while (cakesEaten < 5) {                    // 1
         eatACake()
-        cakesEaten ++
+        cakesEaten++
     }
 
+
+    /*the condition evaluated at the end*/
     do {                                        // 2
         bakeACake()
         cakesBaked++
     } while (cakesBaked < cakesEaten)
+
+
+    /*matrix using while loop*/
+    var i = 0
+    var k = 0
+
+    while (i <= 10) {
+        while (k <= 10) {
+            print("$i,$k \t\t")
+            k++
+        }
+        i++ //for loop does for us but in while we need to increase
+        k = 0
+        println()
+    }
+
+
+    var cats = listOf("cat1", "cat2", "cat3", "cat4")
+    var index = 0
+    while (index < cats.size) {
+        println("hello ${cats[index]}")
+        index++
+    }
+
+
+    /*factorial of number*/
+    var number = 20;
+    var j = 1
+    var result = 1L //to hold more numbers need to be long
+    while (j <= number) {
+        result *= j
+        j++
+    }
+    println("factorial of 20 is:$result")
+
+
+    //ask the user to enter number multiple times until the number is greater than 100
+
+    var finished = false
+    do {
+        println("enter number which is greater than 100")
+        var enteredNumber = readLine() ?: ""
+        var intValue = enteredNumber.toInt()
+        if (intValue > 100){
+            println("thanks")
+        finished=true}
+    } while (!finished)
+
+
+
+
+    var nameList= hashSetOf("uma","raj","kauthik")
+
+    var done=false
+    do{
+        println("enter your name:")
+        var enteredName= readLine()?:""
+        if(nameList.contains(enteredName))
+            println("entered name is taken!try again")
+        else {
+            println("thanks $enteredName")
+            done=true
+        }
+    }
+        while (!done)
+
 }
 
 fun forLoopRangeExpression() {
@@ -65,10 +133,10 @@ fun forLoopRangeExpression() {
 
 
 /*If you want to iterate through an array or a list with an index, you can do it this way:*/
-        val array = arrayOf("a", "b", "c")
-        for (i in array.indices) {
-            println(array[i])
-        }
+    val array = arrayOf("a", "b", "c")
+    for (i in array.indices) {
+        println(array[i])
+    }
 
     /*Alternatively, you can use the withIndex library function:*/
 
@@ -76,20 +144,20 @@ fun forLoopRangeExpression() {
         println("the element at $index is $value")
     }
 
-  /*  To iterate over a range of numbers, we can use a range expression*/
+    /*  To iterate over a range of numbers, we can use a range expression*/
 
 
-    for(i in 0..3) {             // Iterates over a range starting from 0 up to 3 (inclusive)  Like 'for(i=0; i<=3; ++i)
+    for (i in 0..3) {             // Iterates over a range starting from 0 up to 3 (inclusive)  Like 'for(i=0; i<=3; ++i)
         print(i)
     }
     print(" ")
 
-    for(i in 0 until 3) {        // Iterates over a range starting from 0 up to 3 (exclusive). like 'for(i=0; i<3; ++i)
+    for (i in 0 until 3) {        // Iterates over a range starting from 0 up to 3 (exclusive). like 'for(i=0; i<3; ++i)
         print(i)
     }
     print(" ")
 
-    for(i in 2..8 step 2) {      // Iterates over a range with a custom increment step for consecutive elements.
+    for (i in 2..8 step 2) {      // Iterates over a range with a custom increment step for consecutive elements.
         print(i)
     }
     print(" ")
@@ -98,7 +166,6 @@ fun forLoopRangeExpression() {
         print(i)
     }
     print(" ")
-
 
 
     /*Char ranges are also supported:*/
@@ -114,6 +181,27 @@ fun forLoopRangeExpression() {
     println()
 
 
+    /*iterate through hashmap using for loop */
+
+    val CustomersAndProduct = hashMapOf(Pair("Alice", 4), Pair("david", 3), Pair("jack", 1))
+    for (customerName in CustomersAndProduct.keys) {
+
+        val NumberOfProduct = CustomersAndProduct.get(customerName)
+        println("$customerName bought $NumberOfProduct items")
+    }
+
+
+    /*nested for loop*/
+    for (i in 1..5) {
+        for (j in 1..5) {
+            if (i == j) {
+                print("diagonal\t")
+            } else
+                print("$i,$j  \t\t")  //  \t prints the tab
+        }
+        println()
+    }
+
     /*Ranges are also useful in if statements:*/
 
     val x = 2
@@ -125,11 +213,71 @@ fun forLoopRangeExpression() {
     if (x !in 6..10) {          // 2
         print("x is not in range from 6 to 10")
     }
+
+
+    /*left triangle*/
+    println()
+    for (i in 1..10) {
+        for (j in 1..i) {
+            print("*\t")
+        }
+        println()
+    }
+
+
+    /*Ask the user for a number.
+
+Print out a square matrix of the size indicated by the number.
+
+Inside each cell, print out 1 emoji
+
+😀 If the row*column is divisible by 3
+🤨 If the row*column % 3 is 1
+😱 If the row*column % 3 is 2*/
+
+    println("enter size of matrix")
+    var enteredMatrixSize = readLine() ?: "0"
+    var matrixInt = enteredMatrixSize.toInt()
+
+    for (i in 1..matrixInt) {
+        for (j in 1..matrixInt) {
+
+            /*  if ((i * j) % 3 == 0) {
+                  print("0\t")
+              } else if ((i * j) % 3 == 1) {
+                  print("1\t")
+              } else if ((i * j) % 3 == 2) {
+                  print("2\t")
+              } else
+                  print("$i,$j \t")*/
+
+            when (i * j % 3) {
+                0 -> print("\ud83D\uDE00\t")
+                1 -> print("\uD83E\uDD28\t")
+                2 -> print("\uD83D\uDE31\t")
+            }
+        }
+        println()
+    }
+
+    /*ask the use rto input value and lets call that value as maxValue
+    * print the value smaller than the max value divisible by 7*/
+    println("enter maxvalue:")
+    var input = readLine() ?: "0" //if nothing is entered default is 0
+    var maxValue = input.toInt()
+
+
+    for (smallValue in maxValue downTo 0) {
+        if (smallValue % 7 == 0 && smallValue != 0) {
+            println("Number divisible by 7 is:$smallValue")
+        }
+    }
+
+
 }
 
 
-
-    fun whenExpression() {
+fun whenExpression() {
     /*when is a conditional expression  with multiple branches.
     * it similar to switch statement in java
     * we can use "when"as a statement or an expression
@@ -219,47 +367,46 @@ fun whenAsStatement(obj: Any) {
 
 /*we can use is and !is operator with in when statement*/
 
-    fun isStringOrInt(x: Any) =
-        when (x) {
+fun isStringOrInt(x: Any) =
+    when (x) {
 
-            is String -> println("string length is ${x.length}")
+        is String -> println("string length is ${x.length}")
 
-            is Int -> println("after subtract 2 from x is  ${x.minus(2)}")
-
-
-            else -> println("x is neither string nor integer")
-
-        }
+        is Int -> println("after subtract 2 from x is  ${x.minus(2)}")
 
 
-    fun ifExpression() {
-
-        /*
-    * in kotlin ,if is an expression and returns a value
-    * if branches can be code block ,in that case ,last expression  is the value of a block
-    * if ,if branch returns value or assigning it to a variable ,the else branch is mandatory */
-
-        val a = 1;
-        val b = 2;
-
-        val max = if (b > a) b else a
-
-        println("maximum is $max")
-
-
-        val maxi = if (a > b) {
-            print("Choose a")
-            a
-        } else {
-            print("Choose b")
-            b
-        }
-
-        println()
-        println("maximum in code block is $maxi")
+        else -> println("x is neither string nor integer")
 
     }
 
+
+fun ifExpression() {
+
+    /*
+* in kotlin ,if is an expression and returns a value
+* if branches can be code block ,in that case ,last expression  is the value of a block
+* if ,if branch returns value or assigning it to a variable ,the else branch is mandatory */
+
+    val a = 1;
+    val b = 2;
+
+    val max = if (b > a) b else a
+
+    println("maximum is $max")
+
+
+    val maxi = if (a > b) {
+        print("Choose a")
+        a
+    } else {
+        print("Choose b")
+        b
+    }
+
+    println()
+    println("maximum in code block is $maxi")
+
+}
 
 
 class KotlinBasic
