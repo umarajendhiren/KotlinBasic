@@ -10,7 +10,9 @@ package com.androidapps.basic.kotlinbasics
 class Example // Implicitly inherits from Any
 
 //merge conflict
-var firstname = "uma"
+//var firstname = "uma"
+
+var lastname = "rajendhiren"
 
 
 /*By default, Kotlin classes are final – they can’t be inherited.
