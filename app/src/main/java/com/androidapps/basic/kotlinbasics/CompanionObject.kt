@@ -1,5 +1,8 @@
 package com.androidapps.basic.kotlinbasics
 
+/*Companion object:
+* this is the way to make a code available from a class without need of the object.this is static code*/
+
 /*An object declaration inside a class can be marked with the companion keyword:*/
 
 class CompanionObject {
@@ -27,7 +30,7 @@ acts as a reference to the companion object of the class (whether named or not):
 
 class MyClass1 {
     companion object Named {
-        var name:String="abc"
+        var name: String = "abc"
     }
 }
 
@@ -35,12 +38,65 @@ val a = MyClass1.name
 
 class MyClass2 {
     companion object {
-        var name:String="abc"
+        var name: String = "abc"
     }
 }
 
 val b = MyClass2.name
 
+
+class CarCompanionExp1 {
+    companion object {
+        fun startDriving(): String {
+            return "Car is running!"
+        }
+    }
+}
+
+
+/*A class KotlinCourse will provide Kotlin information.
+ It will also provide some general information about the course without needing an object to be created.
+Implement this functionality in a program and display the general information.
+*/
+
+class KotlinCourse() {
+
+    companion object {
+        var generalInfo = "Kotlin is an easy language to lear"
+    }
+
+    fun getCourseInfo() {
+        println("Kotlin is java based development language")
+    }
+}
+
+
+/*A book class will provide information about the editor without the need to be instantiated.
+
+It will also require this information - in the form of an editor object type - in the constructor.
+
+Implement this in a program*/
+
+
+class Book(val editor: Editor) {
+    companion object {
+        fun getEditor() = Editor("Editor name is kauthik")
+    }
+}
+
+class Editor(var editorName: String) {
+
+}
+
+fun main(args: Array<String>) {
+    var c = CarCompanionExp1.startDriving()
+    println(c)
+
+    println(KotlinCourse.generalInfo)
+
+    var book = Book(Book.getEditor())
+    println(book)
+}
 
 
 /*Semantic difference between object expressions and declarations:
