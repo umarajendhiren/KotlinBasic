@@ -12,7 +12,7 @@ class Example // Implicitly inherits from Any
 //merge conflict
 //var firstname = "uma"
 
-var lastname = "rajendhiren"
+var lastname = "Rajendhiren"
 
 
 /*By default, Kotlin classes are final – they can’t be inherited.
