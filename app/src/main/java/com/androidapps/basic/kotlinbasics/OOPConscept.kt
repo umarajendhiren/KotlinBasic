@@ -45,7 +45,7 @@ class Son : Father() {
 * if we don't have setter for that private variable  no one can change that variable name*/
 
 
-class EncryptionLock(var privateKey:Int) {
+class EncryptionLock(var privateKey: Int) {
 
     var publicKey = 0;
     private fun isValid(): Boolean {
@@ -66,10 +66,183 @@ class EncryptionLock(var privateKey:Int) {
 /*abstraction
 * it similar to inheritance.
 * A common feature of two classes should be abstracted in a third class
-* if two classes has same functionality ,we should extract those functionality into third class and need to make that two classes inherit from third class*/
+* if two classes has same functionality or common  future ,we should extract those functionality into third class(Super class) and need to make that other two classes inherit from third class
+* interface uses the basic idea of abstraction
+* the keyword "abstract" means class can not be instantiated only extended from*/
+
+class Bottle {
+    fun pour() {
+        println("pouring liquid")
+    }
+}
+
+class Jug {
+    fun pour() {
+        println("pouring liquid")  //code duplication
+    }
+}
+
+/*To reduce code duplication we can create abstract class but we can not create object for this container class*/
+abstract class Container {
+    //if we want common implementation
+    /* fun pour() {
+         println("pouring liquid")
+     }*/
+
+    //if we want unique implementation in each child
+    abstract fun pour()
+}
+
+class Bottle1 : Container() {
+    override fun pour() {
+        println("pouring bottle liquid")
+    }
+
+    fun fill() {
+        println("filling bottle")
+    }
+}
+
+class Jug1 : Container()   //function reused
+{
+    override fun pour() {
+        println("pouring jug liquid")
+    }
+}
+
+
+/*
+A class Dog can run, bark and play.
+A Pug can run and play but cannot bark.
+A Basset Hound can bark and play but cannot run.
+An old Chihuahua can bark and run but cannot play.
+Implement this in a program and print out what each dog breed can and cannot do.
+*/
+
+abstract class Dog(name: String) {
+    abstract fun run()
+    abstract fun play()
+    abstract fun bark()
+}
+
+/*if we  extend abstract class we need to implement all it's abstract method.*/
+class DogType1(var type1: String) : Dog(type1) {
+    override fun run() {
+        println("$type1 Can run")
+    }
+
+    override fun play() {
+        println("$type1 Can play")
+    }
+
+    override fun bark() {
+        println("$type1 Can't bark")
+    }
+}
+
+class DogType2(var type2: String) : Dog(type2) {
+    override fun run() {
+        println("$type2 Can run")
+    }
+
+    override fun play() {
+        println("$type2 Can't play")
+    }
+
+    override fun bark() {
+        println("$type2 Can bark")
+    }
+}
+
+
+/*A default oven has an average cooking speed, top temperature and function for cooking.
+
+A Bosch oven has a higher cooking temperature.
+
+A Roaster oven does not cook but roasts. The speed and temperature are average.
+
+Implement this in a program and print out the various information for the objects.*/
+
+abstract class defaultOven() {
+    val cookingSpeed = 120
+    open val averageCooingTemperature = 100
+    abstract fun cooking()
+}
+
+class Bosch : defaultOven() {
+    override val averageCooingTemperature = 140
+    override fun cooking() {
+        println("Bosch Cooking At temp ${averageCooingTemperature}F and cooking speed is $cookingSpeed min")
+    }
+}
+
+class Roster : defaultOven() {
+    override fun cooking() {
+        println("This Roaster oven doesn't cook but roast at temp ${averageCooingTemperature}F and cooking speed is $cookingSpeed min")
+    }
+}
+
 
 /*polymorphism:
-* one name ,many forms*/
+* one name ,many forms
+* A function can do different things in different situation
+* 2 types:
+* Dynamic:method overriding
+* static:method overloading*/
+
+
+/*method overriding in child class*/
+open class Mom {
+    open fun say(message: String) {
+        println("Mom says $message")
+    }
+}
+/*here overriding method is not compulsory*/
+
+class Daughter : Mom() {
+    override fun say(message: String) {
+        println("daughter says $message")
+    }
+}
+
+
+/*method overloading in same class
+* type of parameter is important in method overloading*/
+
+class Mom1 {
+    fun say(message: String) {
+        println("Mom1 says $message")
+    }
+
+    fun say() {
+        println("Mom1 says Hi!")
+    }
+
+    fun say(times: Int) {
+        println("Mom1 says Hi! $times times")
+    }
+
+}
+
+
+/*A Translator can provide a hello message in english by default, but also in two different languages.
+If the language is not known, a default english message is provided.
+Implement the Translator class and call an object from it with different language parameters.
+*/
+
+class Translator() {
+    fun sayHello() {
+        println("English:Hello!")
+    }
+
+    fun sayHello(language: String) {
+        when (language) {
+            "Tamil" -> println("Tamil:Vanakkam!")
+            "Hindi" -> println("Hindi:Namashthe!")
+            else -> println("English:Hello")
+        }
+    }
+}
 
 
 /*Scope:
@@ -91,4 +264,52 @@ fun main(args: Array<String>) {
     encryptionLock.unlock(3)
     encryptionLock.unlock(11)
 
+
+    // var containerInstance=Container() //can not initiate abstract class
+
+    var containerTypeInstance: Container = Bottle1()
+    containerTypeInstance.pour()
+
+    //here containerTypeInstance can not call fill() because instance is Container type
+    //containerInstance.fill()
+
+
+    var bottleTypeInstance = Bottle1()
+    bottleTypeInstance.pour()
+    bottleTypeInstance.fill()
+
+    var type1 = DogType1("pug")
+    var type2 = DogType1("basset")
+    type1.bark()
+    type1.play()
+    type1.run()
+    type2.bark()
+    type2.play()
+    type2.run()
+
+
+    var bosch = Bosch()
+    bosch.cooking()
+    var roster = Roster()
+    roster.cooking()
+
+
+    /*polymorphism -method overriding*/
+    var momInstance = Mom()
+    momInstance.say("hai!")
+
+    var daughterInstance = Daughter()
+    daughterInstance.say("hello!")
+
+    /*polymorphism -method overloading*/
+    var mom1Instance = Mom1()
+    mom1Instance.say()
+    mom1Instance.say("Hello !")
+    mom1Instance.say(3)
+
+    var translatorInstance = Translator()
+    translatorInstance.sayHello()
+    translatorInstance.sayHello("Tamil")
+    translatorInstance.sayHello("ksjdfh")
 }
+
