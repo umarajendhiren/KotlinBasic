@@ -1,6 +1,15 @@
 package com.androidapps.basic.kotlinbasics
 
 class enumBasics
+
+/*define a collection of constants
+* the constants defined are objects
+* the constants have properties
+* enum constants can be initialized
+* constants have properties like
+* name
+* ordinal*/
+
 /*some times we may need an object to holed constant only .that time we need to use enumeration concept.
 * enumeration is named list of constants.
 * Kotlin enums are classes
@@ -156,11 +165,11 @@ fun main() {
 
 
     // calling foo() function override be Summer constant
-   // Seasons.Summer.foo()
+    // Seasons.Summer.foo()
 
-val dayName=DAYS.SUNDAY
+    val dayName = DAYS.SUNDAY
 
-    when(dayName) {
+    when (dayName) {
         DAYS.SUNDAY -> println("Today is Sunday")
         DAYS.MONDAY -> println("Today is Monday")
         DAYS.TUESDAY -> println("Today is Tuesday")
@@ -169,7 +178,107 @@ val dayName=DAYS.SUNDAY
         DAYS.FRIDAY -> println("Today is Friday")
         DAYS.SATURDAY -> println("Today is Saturday")
         // Adding an else clause will generate a warning
+
+
+    }
+
+
+    decide(Colors.GREEN)
+
+    println(Colors.RED.ordinal)
+    println(Colors.GREEN.ordinal)
+    println(Colors.BLUE.ordinal)
+
+    println(Colors.GREEN.timesUsed)
+
+    println(Colors.BLUE.name) //returns name of enum constants
+
+
+    println("current state is playing and changed state is  ${changeState(GameState.Playing)}")
+
+
+    var olympic = Olympic()
+    println("place for gold is ${olympic.placeForMedals(Medals.Gold)}")
+    olympic.medalForPlace(Medals.Bronze.place)
+}
+
+enum class Colors(var timesUsed: Int) {
+    RED(8), GREEN(13), BLUE(timesUsed = 34)
+}
+
+fun decide(color: Colors) {
+    when (color) {
+        Colors.RED -> println("you chose red")
+        Colors.BLUE -> println("you chose blue")
+        Colors.GREEN -> println("you choose green")
+
     }
 }
 
 
+/*We have a game that only has three states
+STARTED
+PLAYING
+GAMEOVER
+The states can only move in the direction STARTED->PLAYING->GAMEOVER, so a game class has a function to move the game from one state to another.
+Create the game class and an object that is used to move the game through the states and print the result.*/
+
+
+enum class GameState {
+    Started, Playing, GameOver
+}
+
+fun changeState(currentState: GameState): GameState {
+    when (currentState) {
+        GameState.Started -> return GameState.Playing
+        GameState.Playing -> return GameState.GameOver
+        GameState.GameOver -> return GameState.Started
+
+    }
+}
+
+
+/*The medals in the olympics are
+
+    GOLD - 1st place
+
+    SILVER - 2nd place
+
+    BRONZE - 3rd place
+
+    NONE - other
+
+Create a class Olympics that has a function which returns the medal a contestant won based on the position they finished on.
+It also has a function which returns the position of a contestant based on the medal they won.
+Create an object of that class and call its methods.*/
+
+
+enum class Medals(var place: String) {
+    Gold("1st place"),
+    Silver("2nd place"),
+    Bronze("3rd place"),
+    None("other")
+}
+
+class Olympic {
+    /* fun placeForMedals(medal: Medals) {
+         when (medal) {
+             Medals.Gold -> println("1st place")
+             Medals.Silver -> println("2nd place")
+             Medals.Bronze -> println("3rd place")
+             Medals.None -> println("other")
+
+         }
+     }*/
+
+    fun placeForMedals(medals: Medals) = medals.place
+
+    fun medalForPlace(place: String) {
+        when (place) {
+            Medals.Gold.place -> println("Gold")
+            Medals.Silver.place -> println("Silver")
+            Medals.Bronze.place -> println("Bronze")
+            Medals.None.place -> println("None")
+        }
+    }
+}
