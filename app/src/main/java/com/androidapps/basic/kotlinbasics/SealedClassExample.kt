@@ -70,30 +70,40 @@ sealed class SealedClassExample {
     }
 
     //if we create new  subclass after all or new subclass outside this file, it will throw error like "when' expression must be exhaustive, add necessary 'is April' branch or 'else' branch instead"
-    class April:SealedClassExample(){}
+    class April : SealedClassExample() {}
 
 }
 
-    //7
-    fun sampleAccess(month: SealedClassExample) = when (month) {
-        is SealedClassExample.January -> println("Number of days in January${month.numberOfDays}")
-        is SealedClassExample.February -> println("Display name of February ${month.displayName}")
-        is SealedClassExample.March -> println("Number of days & Display name of March ${month.numberOfDays} && ${month.displayName}")
-        is SealedClassExample.April -> println("This is April month")
+//7
+fun sampleAccess(month: SealedClassExample) = when (month) {
+    is SealedClassExample.January -> println("Number of days in January${month.numberOfDays}")
+    is SealedClassExample.February -> println("Display name of February ${month.displayName}")
+    is SealedClassExample.March -> println("Number of days & Display name of March ${month.numberOfDays} && ${month.displayName}")
+    is SealedClassExample.April -> println("This is April month")
+}
+
+
+fun main() {
+
+    val jan = SealedClassExample.January(31)
+    val feb = SealedClassExample.February("Feb")
+
+    sampleAccess(jan)
+    sampleAccess(feb)
+
+    var somePlant = getPlant()  //return type plant
+    when (somePlant) {
+        is Fruit -> println("Sweet Fruit")
+        is Vegetable -> println("Tasty vegetable")
+        //here we can give n number of Fruits and vegetables to know which plant it is
     }
 
-
-    fun main(){
-
-        val jan = SealedClassExample.January(31)
-        val feb = SealedClassExample.February("Feb")
-
-        sampleAccess(jan)
-        sampleAccess(feb)
+    var vehicleName = getVehicle() //returns type vehicle
+    when (vehicleName) {
+        is Bicycle -> println("Bicycling is healthy")
+        is Flight -> println("Flight is Faster")
     }
-
-
-
+}
 
 
 //5
@@ -109,6 +119,32 @@ class enumSubClass:Result("SUCCESS")
 */
 
 
+/* example1*/
 
+abstract class Plant
+sealed class Fruit : Plant()
+sealed class Vegetable : Plant()
+
+/*we can not instantiate sealed classes .so we need to create class to use Plant class*/
+class Apple : Fruit()
+class Potato : Vegetable()
+
+//fun getPlant(): Plant = Apple()
+fun getPlant(): Plant = Potato()
+
+
+/*A function getVehicle returns a type Vehicle that can either be a car or a bicycle.
+If a bicycle is returned, print out a message saying it’s more healthy
+If a car is returned, print out a message saying it’s faster
+*/
+abstract class Vehicle1
+sealed class Bicycle : Vehicle1()
+sealed class Flight : Vehicle1()
+
+class RoyalBabyBicycle : Bicycle()
+class UnitedAirLines : Flight()
+
+fun getVehicle(): Vehicle1 = RoyalBabyBicycle()
+//fun getVehicle():Vehicle1=UnitedAirLines()
 
 
