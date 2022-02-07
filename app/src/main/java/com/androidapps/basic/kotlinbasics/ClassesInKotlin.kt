@@ -1,6 +1,6 @@
 package com.androidapps.basic.kotlinbasics
 
-//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
+//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
 /*class is a blue print it allow us to create object
 * class can have variables and functions
 * if we declare the variable in class context,that will available within class.All methods defined inside class can access that variable.
