@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Basic">
-        <activity android:name=".runtaskinbackgroundthread.bakgroundthreadActivity"></activity>
+        <activity android:name=".kotlinbasics.Test"></activity>
+        <activity android:name=".runtaskinbackgroundthread.bakgroundthreadActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -64,8 +64,10 @@ class Chef<T : Fruit1> {
 It has a function that iterates through the elements, converts them to String and prints them out to the console.
 Instantiate the class with different types of collections and call the function.
 */
-class Printer<T : Collection<String>> //here we can pass any collection of type string Set<String>,List<String> not Set<Int> and List<Int>
-{
+
+//am  creating the class with generic  argument of  type Collection of type String
+//here we can pass any collection of type string Set<String>,List<String> not Set<Int> and List<Int>
+class Printer<T : Collection<String>> {
     fun printElement(collection: T) {
         collection.forEach { println(it.toString()) }
     }
